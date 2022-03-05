@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "499847241781",
+    "project_id": "my-expert-team-prediction",
+    "storage_bucket": "my-expert-team-prediction.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499847241781:android:1311d72f1c4e3c260fd17c",
+        "android_client_info": {
+          "package_name": "com.sumit.myexpertteam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499847241781-etl78pcrjkga5402oqmcgijql3r8veju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sumit.myexpertteam",
+            "certificate_hash": "9244fe79748cc6bc570856a9ebd14218ba98155e"
+          }
+        },
+        {
+          "client_id": "499847241781-o7rc5flniuur0ivesk90fsfhrnlbj9sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyZOR_ExpOOCd0PMKVh9P8z3RW6VZPOC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499847241781-o7rc5flniuur0ivesk90fsfhrnlbj9sj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
