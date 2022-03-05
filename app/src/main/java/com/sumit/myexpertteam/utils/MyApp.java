@@ -47,11 +47,10 @@ public class MyApp extends Application {
     }
 
     public static void showInterstitialAd(Activity context) {
-        AudienceNetworkAds.initialize(context);
         String id = Paper.book().read(Prevalent.interstitialAds);
         Log.d("admobAdInter", id);
         com.facebook.ads.InterstitialAd
-                interstitialAd = new com.facebook.ads.InterstitialAd(context, "5185480391502531_5185485924835311");
+                interstitialAd = new com.facebook.ads.InterstitialAd(context, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID");
         InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
             @Override
             public void onInterstitialDisplayed(Ad ad) {
@@ -101,10 +100,9 @@ public class MyApp extends Application {
     }
 
     public static void showBannerAd(Context context, RelativeLayout container) {
-        AudienceNetworkAds.initialize(context);
         String id = Paper.book().read(Prevalent.bannerAds);
         Log.d("facebookBannerId",id);
-        AdView adView = new AdView(context, "5185480391502531_5185485391502031", AdSize.BANNER_HEIGHT_50);
+        AdView adView = new AdView(context, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
         container.addView(adView);
         adView.loadAd();
         container.setVisibility(View.VISIBLE);
