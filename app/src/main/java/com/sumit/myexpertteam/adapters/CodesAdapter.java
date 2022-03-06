@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,39 +61,45 @@ public class CodesAdapter extends RecyclerView.Adapter<CodesAdapter.ViewHolder> 
         holder.showFullProfileImage(codesModelList.get(position).getImages());
 
         holder.profileImg.setOnClickListener(v -> {
-
-            if (MyApp.mInterstitialAd != null) {
-                MyApp.mInterstitialAd.show(((Activity)context));
-                MyApp.mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                    @Override
-                    public void onAdDismissedFullScreenContent() {
-                        // Called when fullscreen content is dismissed.
-                        holder.dialog.show();
-
-                    }
-
-                    @Override
-                    public void onAdFailedToShowFullScreenContent(AdError adError) {
-                        // Called when fullscreen content failed to show.
-                        Log.d("TAG", "The ad failed to show.");
-                    }
-
-                    @Override
-                    public void onAdShowedFullScreenContent() {
-                        // Called when fullscreen content is shown.
-                        // Make sure to set your reference to null so you don't
-                        // show it a second time.
-                        MyApp.mInterstitialAd = null;
-                        Log.d("TAG", "The ad was shown.");
-                    }
-                });
-            } else {
-                MyApp.showInterstitialAd(((Activity) context));
-                holder.dialog.show();
-
-                Log.d("TAG", "The interstitial ad wasn't ready yet.");
-
-            }
+            holder.dialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    MyApp.showInterstitialAd(((Activity)context));
+                }
+            },5000);
+//            if (MyApp.mInterstitialAd != null) {
+//                MyApp.mInterstitialAd.show(((Activity)context));
+//                MyApp.mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+//                    @Override
+//                    public void onAdDismissedFullScreenContent() {
+//                        // Called when fullscreen content is dismissed.
+//                        holder.dialog.show();
+//
+//                    }
+//
+//                    @Override
+//                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+//                        // Called when fullscreen content failed to show.
+//                        Log.d("TAG", "The ad failed to show.");
+//                    }
+//
+//                    @Override
+//                    public void onAdShowedFullScreenContent() {
+//                        // Called when fullscreen content is shown.
+//                        // Make sure to set your reference to null so you don't
+//                        // show it a second time.
+//                        MyApp.mInterstitialAd = null;
+//                        Log.d("TAG", "The ad was shown.");
+//                    }
+//                });
+//            } else {
+//                MyApp.showInterstitialAd(((Activity) context));
+//                holder.dialog.show();
+//
+//                Log.d("TAG", "The interstitial ad wasn't ready yet.");
+//
+//            }
         });
     }
 

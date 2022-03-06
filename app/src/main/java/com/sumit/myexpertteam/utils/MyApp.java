@@ -17,9 +17,9 @@ import com.facebook.ads.AdError;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.facebook.ads.AudienceNetworkAds;
+import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.onesignal.OSNotificationOpenedResult;
 import com.onesignal.OneSignal;
 import com.sumit.myexpertteam.activities.SplashActivity;
@@ -37,7 +37,8 @@ import retrofit2.Response;
 
 public class MyApp extends Application {
     private static final String ONESIGNAL_APP_ID = "452632c3-18f4-4e3a-b63a-3f866ac82186";
-    public static InterstitialAd mInterstitialAd;
+    public static InterstitialAd interstitialAd;
+
     public static MyApp mInstance;
     ApiInterface apiInterface;
 
@@ -48,9 +49,10 @@ public class MyApp extends Application {
 
     public static void showInterstitialAd(Activity context) {
         String id = Paper.book().read(Prevalent.interstitialAds);
+
         Log.d("admobAdInter", id);
-        com.facebook.ads.InterstitialAd
-                interstitialAd = new com.facebook.ads.InterstitialAd(context, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID");
+
+        interstitialAd = new InterstitialAd(context, id);
         InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
             @Override
             public void onInterstitialDisplayed(Ad ad) {
@@ -101,8 +103,8 @@ public class MyApp extends Application {
 
     public static void showBannerAd(Context context, RelativeLayout container) {
         String id = Paper.book().read(Prevalent.bannerAds);
-        Log.d("facebookBannerId",id);
-        AdView adView = new AdView(context, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
+        Log.d("facebookBannerId", id);
+        AdView adView = new AdView(context, id, AdSize.BANNER_HEIGHT_50);
         container.addView(adView);
         adView.loadAd();
         container.setVisibility(View.VISIBLE);
@@ -176,6 +178,7 @@ public class MyApp extends Application {
 //            AppOpenManager.isIsShowingAd = false;
 //        }
 //    }
+
 
     private class ExampleNotificationOpenedHandler implements OneSignal.OSNotificationOpenedHandler {
 
