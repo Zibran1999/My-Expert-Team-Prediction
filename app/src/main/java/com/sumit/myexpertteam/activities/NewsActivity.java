@@ -36,11 +36,11 @@ public class NewsActivity extends AppCompatActivity {
         desc = getIntent().getStringExtra("desc");
         title = getIntent().getStringExtra("title");
         pos = getIntent().getIntExtra("newsPos", 0);
-//        if (pos != 0) {
-//            new Handler().postDelayed(() -> {
-//                MyApp.showInterstitialAd(this);
-//            }, 1000);
-//        }
+
+            new Handler().postDelayed(() -> {
+                MyApp.showInterstitialAd(this);
+            }, 2000);
+
 
         Glide.with(this).load("https://softwaresreviewguides.com/dreamteam11/APIs/Cricket_News_Images/" + img).into(newsImg);
         newsTitle.setText(title);

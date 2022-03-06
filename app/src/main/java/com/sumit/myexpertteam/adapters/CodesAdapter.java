@@ -62,12 +62,9 @@ public class CodesAdapter extends RecyclerView.Adapter<CodesAdapter.ViewHolder> 
 
         holder.profileImg.setOnClickListener(v -> {
             holder.dialog.show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    MyApp.showInterstitialAd(((Activity)context));
-                }
-            },5000);
+            if (position%2==0){
+                new Handler().postDelayed(() -> MyApp.showInterstitialAd(((Activity)context)),1000);
+            }
 //            if (MyApp.mInterstitialAd != null) {
 //                MyApp.mInterstitialAd.show(((Activity)context));
 //                MyApp.mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {

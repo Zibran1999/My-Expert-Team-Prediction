@@ -40,15 +40,8 @@ public class WelcomeActivity extends AppCompatActivity {
         MyApp.showBannerAd(this, binding.adView2);
 
         startBtn.setOnClickListener(v -> {
-            // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), getApplicationContext());
-            MyApp.showInterstitialAd(WelcomeActivity.this);
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    startActivity(new Intent(getApplicationContext(), MyHome.class));
-                }
-            }, 1000);
+            new Handler().postDelayed(() -> startActivity(new Intent(getApplicationContext(), MyHome.class)), 1000);
 
 
 //            if (MyApp.mInterstitialAd != null) {

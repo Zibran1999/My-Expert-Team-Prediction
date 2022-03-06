@@ -2,6 +2,7 @@ package com.sumit.myexpertteam.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -64,9 +65,11 @@ public class MyBestTeam extends AppCompatActivity {
                             if (MatchDetails.id.equals(teamId)) {
                                 Glide.with(context).load("https://softwaresreviewguides.com/dreamteam11/APIs/Team_Player_Images/" + teamImages).into(teamImage);
                                 lottieAnimationView.setVisibility(View.GONE);
+                                new Handler().postDelayed(() -> MyApp.showInterstitialAd(MyBestTeam.this), 2000);
+                                MyApp.showBannerAd(this,binding.adView);
                             }
                         }
-                        MyApp.showBannerAd(this,binding.adView);
+
 //                        MyApp.showInterstitialAd(this);
 
 
@@ -91,10 +94,12 @@ public class MyBestTeam extends AppCompatActivity {
                             if (MatchDetails.id.equals(teamId)) {
                                 Glide.with(context).load("https://softwaresreviewguides.com/dreamteam11/APIs/Grand_Team_Player_Images/" + teamImages).into(teamImage);
                                 lottieAnimationView.setVisibility(View.GONE);
+                                new Handler().postDelayed(() -> MyApp.showInterstitialAd(MyBestTeam.this), 2000);
 
+                                MyApp.showBannerAd(this,binding.adView);
                             }
                         }
-                        MyApp.showBannerAd(this,binding.adView);
+
 //                        MyApp.showInterstitialAd(this);
                     } else {
                         binding.textView.setVisibility(View.GONE);
@@ -120,11 +125,12 @@ public class MyBestTeam extends AppCompatActivity {
                                 Glide.with(context).load("https://softwaresreviewguides.com/dreamteam11/APIs/Simple_Team_Player_Images/" + teamImages).into(teamImage);
                                 lottieAnimationView.setVisibility(View.GONE);
                                 Log.d("teamImage", t.getTeamImage());
-
+                                new Handler().postDelayed(() -> MyApp.showInterstitialAd(MyBestTeam.this), 2000);
+                                MyApp.showBannerAd(this,binding.adView);
                             }
                         }
 
-                        MyApp.showBannerAd(this,binding.adView);
+
 //                        MyApp.showInterstitialAd(this);
 
                     } else {

@@ -41,6 +41,7 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.Task;
+import com.sumit.myexpertteam.BuildConfig;
 import com.sumit.myexpertteam.R;
 import com.sumit.myexpertteam.activities.ui.main.SectionsPagerAdapter;
 import com.sumit.myexpertteam.databinding.ActivityMyHomeBinding;
@@ -219,7 +220,8 @@ public class MyHome extends AppCompatActivity implements NavigationView.OnNaviga
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
             String shareMessage = "\nLet me recommend you this application\n\n";
-//            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
+
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             startActivity(Intent.createChooser(shareIntent, "choose one"));
         } catch (Exception e) {

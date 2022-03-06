@@ -70,7 +70,7 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  MobileAds.initialize(requireActivity());
+        //  MobileAds.initialize(requireActivity());
         AudienceNetworkAds.initialize(requireActivity());
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
@@ -96,6 +96,10 @@ public class PlaceholderFragment extends Fragment {
 
         matchViewModel = new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
         if (index == 1) {
+            new Handler().postDelayed(() -> {
+                MyApp.showInterstitialAd(requireActivity());
+
+            }, 3000);
             lottieAnimationView.setAnimation(R.raw.loding_dot);
             lottieAnimationView.playAnimation();
             swipeRefreshLayout.setOnRefreshListener(() -> {
@@ -156,12 +160,6 @@ public class PlaceholderFragment extends Fragment {
 
                     // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            MyApp.showInterstitialAd(requireActivity());
-                        }
-                    },5000);
 
                     Intent intent = new Intent(context, MatchDetails.class);
                     intent.putExtra("matchPos", position);
@@ -273,12 +271,6 @@ public class PlaceholderFragment extends Fragment {
                 NewsAdapter newsAdapter = new NewsAdapter(newsModelList, requireActivity(), bannerAds, (newsDatum, position) -> {
 //                    if (position % 2 == 0) {
                     // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            MyApp.showInterstitialAd(requireActivity());
-                        }
-                    },5000);
 
                     Intent intent = new Intent(context, NewsActivity.class);
                     intent.putExtra("newsPos", position);
@@ -402,12 +394,7 @@ public class PlaceholderFragment extends Fragment {
 
 //                    if (position % 2 == 0) {
                     // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            MyApp.showInterstitialAd(requireActivity());
-                        }
-                    },5000);
+
 
                     Intent intent = new Intent(context, MatchDetails.class);
                     intent.putExtra("id", datum.getId());

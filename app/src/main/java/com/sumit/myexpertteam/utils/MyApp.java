@@ -44,10 +44,12 @@ public class MyApp extends Application {
 
 
     public MyApp() {
+
         mInstance = this;
     }
 
     public static void showInterstitialAd(Activity context) {
+
         String id = Paper.book().read(Prevalent.interstitialAds);
 
         Log.d("admobAdInter", id);

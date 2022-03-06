@@ -49,9 +49,7 @@ import com.sumit.myexpertteam.models.MatchDetailModels.MatchViewModelFactory;
 import com.sumit.myexpertteam.models.MatchDetailModels.WebServices;
 import com.sumit.myexpertteam.utils.AppOpenManager;
 import com.sumit.myexpertteam.utils.MyApp;
-import com.sumit.myexpertteam.utils.Prevalent;
 import com.theartofdev.edmodo.cropper.CropImage;
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -63,7 +61,6 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,8 +87,8 @@ public class MatchDetailsFragment extends Fragment {
     RelativeLayout previewAd, teamAd, codeView;
     Button headBtn, grandBtn, simpleBtn;
     List<CodesModel> codesModelList = new ArrayList<>();
-    private FragmentMatchDetailsBinding binding;
     AppOpenManager appOpenManager;
+    private FragmentMatchDetailsBinding binding;
 
     public static MatchDetailsFragment newInstance(int index) {
 
@@ -128,7 +125,6 @@ public class MatchDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MobileAds.initialize(requireActivity());
-        MyApp.showInterstitialAd(requireActivity());
         PageViewModel pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
 
         if (getArguments() != null) {
@@ -162,6 +158,7 @@ public class MatchDetailsFragment extends Fragment {
         loadingDialog.setCancelable(false);
         //**Loading Dialog****/
         if (index == 1) {
+
             View view = root.findViewById(R.id.preview);
             WebView previewText = view.findViewById(R.id.preview_data);
             MaterialButtonToggleGroup materialButtonToggleGroup = view.findViewById(R.id.materialButtonToggleGroup);
@@ -186,14 +183,10 @@ public class MatchDetailsFragment extends Fragment {
                 if (!matchPreviewList.isEmpty()) {
                     MyApp.showBannerAd(requireActivity(), previewAd);
                     codeView.setVisibility(View.GONE);
-//                    if (MatchDetails.adCount == 1) {
-//                        if (MatchDetails.pos % 2 == 1) {
-//
-//                            MyApp.showInterstitialAd(requireActivity());
-//
-//                            MatchDetails.adCount++;
-//                        }
-//                    }
+                    if (MatchDetails.adCount == 1) {
+                            new Handler().postDelayed(() -> MyApp.showInterstitialAd(requireActivity()), 2000);
+                            MatchDetails.adCount++;
+                    }
 
                     String hindiString = null;
                     String englishString = null;
@@ -294,14 +287,8 @@ public class MatchDetailsFragment extends Fragment {
             headBtn.setOnClickListener(view -> {
 
                 loadingDialog.show();
-               // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), requireActivity());
+                // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), requireActivity());
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        MyApp.showInterstitialAd(requireActivity());
-                    }
-                },5000);
 
                 intent = new Intent(root.getContext(), MyBestTeam.class);
                 intent.putExtra("teamName", "Head");
@@ -364,12 +351,6 @@ public class MatchDetailsFragment extends Fragment {
                 loadingDialog.show();
                 //appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), requireActivity());
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        MyApp.showInterstitialAd(requireActivity());
-                    }
-                },5000);
 
 
                 intent = new Intent(root.getContext(), MyBestTeam.class);
@@ -433,14 +414,8 @@ public class MatchDetailsFragment extends Fragment {
             });
             simpleBtn.setOnClickListener(v -> {
                 loadingDialog.show();
-               // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), requireActivity());
+                // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), requireActivity());
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        MyApp.showInterstitialAd(requireActivity());
-                    }
-                },5000);
 
 
                 intent = new Intent(root.getContext(), MyBestTeam.class);
