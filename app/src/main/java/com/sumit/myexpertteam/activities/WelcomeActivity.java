@@ -9,17 +9,17 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.sumit.myexpertteam.BuildConfig;
 import com.sumit.myexpertteam.R;
 import com.sumit.myexpertteam.databinding.ActivityWelcomeBinding;
 import com.sumit.myexpertteam.utils.AppOpenManager;
 import com.sumit.myexpertteam.utils.MyApp;
-import com.sumit.myexpertteam.utils.Prevalent;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.paperdb.Paper;
 
 public class WelcomeActivity extends AppCompatActivity {
     private final String TAG = WelcomeActivity.class.getSimpleName();
@@ -38,7 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         MyApp.showBannerAd(this, binding.adView);
         MyApp.showBannerAd(this, binding.adView2);
-        MyApp.showInterstitialAd(WelcomeActivity.this);
+
         startBtn.setOnClickListener(v -> {
             // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), getApplicationContext());
             MyApp.showInterstitialAd(WelcomeActivity.this);
@@ -87,13 +87,24 @@ public class WelcomeActivity extends AppCompatActivity {
 
         });
         contactBtn.setOnClickListener(v -> {
-            try {
-                whatsApp();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            contactUs();
         });
         shareBtn.setOnClickListener(v -> shareApp());
+    }
+
+    private void contactUs() {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setPackage("com.google.android.gm");
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"myexpertteam11@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "Hello");
+        i.putExtra(Intent.EXTRA_TEXT, "I need some help regarding ");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(WelcomeActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void whatsApp() throws UnsupportedEncodingException {
@@ -129,7 +140,7 @@ public class WelcomeActivity extends AppCompatActivity {
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
             String shareMessage = "\nLet me recommend you this application\n\n";
-//            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
             shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             startActivity(Intent.createChooser(shareIntent, "choose one"));

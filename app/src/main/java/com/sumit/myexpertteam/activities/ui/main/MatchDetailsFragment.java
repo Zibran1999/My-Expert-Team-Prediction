@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -294,7 +295,13 @@ public class MatchDetailsFragment extends Fragment {
 
                 loadingDialog.show();
                // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), requireActivity());
-                MyApp.showInterstitialAd(requireActivity());
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MyApp.showInterstitialAd(requireActivity());
+                    }
+                },5000);
 
                 intent = new Intent(root.getContext(), MyBestTeam.class);
                 intent.putExtra("teamName", "Head");
@@ -356,7 +363,15 @@ public class MatchDetailsFragment extends Fragment {
             grandBtn.setOnClickListener(view -> {
                 loadingDialog.show();
                 //appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), requireActivity());
-                MyApp.showInterstitialAd(requireActivity());
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MyApp.showInterstitialAd(requireActivity());
+                    }
+                },5000);
+
+
                 intent = new Intent(root.getContext(), MyBestTeam.class);
                 intent.putExtra("teamName", "Grand");
                 startActivity(intent);
@@ -419,7 +434,15 @@ public class MatchDetailsFragment extends Fragment {
             simpleBtn.setOnClickListener(v -> {
                 loadingDialog.show();
                // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), requireActivity());
-                MyApp.showInterstitialAd(requireActivity());
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MyApp.showInterstitialAd(requireActivity());
+                    }
+                },5000);
+
+
                 intent = new Intent(root.getContext(), MyBestTeam.class);
                 intent.putExtra("teamName", "Simple");
                 startActivity(intent);

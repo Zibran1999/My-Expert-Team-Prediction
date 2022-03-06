@@ -178,11 +178,7 @@ public class MyHome extends AppCompatActivity implements NavigationView.OnNaviga
                 finish();
                 break;
             case R.id.whatsapp:
-                try {
-                    whatsApp();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                contactUs();
                 break;
             case R.id.nav_privacy:
                 startActivity(new Intent(getApplicationContext(), PrivacyPolicy.class));
@@ -387,6 +383,21 @@ public class MyHome extends AppCompatActivity implements NavigationView.OnNaviga
                 Toast.makeText(MyHome.this, "Update Failed", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void contactUs() {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setPackage("com.google.android.gm");
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"myexpertteam11@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "Hello");
+        i.putExtra(Intent.EXTRA_TEXT, "I need some help regarding ");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(MyHome.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override

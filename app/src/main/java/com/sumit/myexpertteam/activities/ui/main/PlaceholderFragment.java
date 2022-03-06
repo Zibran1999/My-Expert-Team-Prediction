@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.MobileAds;
+import com.facebook.ads.AudienceNetworkAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.sumit.myexpertteam.R;
 import com.sumit.myexpertteam.activities.MatchDetails;
@@ -35,14 +34,10 @@ import com.sumit.myexpertteam.models.MatchDetailModels.MatchViewModel;
 import com.sumit.myexpertteam.models.MatchNewsModels.NewsDatum;
 import com.sumit.myexpertteam.utils.AppOpenManager;
 import com.sumit.myexpertteam.utils.MyApp;
-import com.sumit.myexpertteam.utils.Prevalent;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import io.paperdb.Paper;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -75,8 +70,8 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MobileAds.initialize(requireActivity());
-        MyApp.showInterstitialAd(requireActivity());
+      //  MobileAds.initialize(requireActivity());
+        AudienceNetworkAds.initialize(requireActivity());
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
         }
@@ -159,8 +154,14 @@ public class PlaceholderFragment extends Fragment {
 
 //                    if (position % 2 == 0) {
 
-                   // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
-                    MyApp.showInterstitialAd(requireActivity());
+                    // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            MyApp.showInterstitialAd(requireActivity());
+                        }
+                    },5000);
 
                     Intent intent = new Intent(context, MatchDetails.class);
                     intent.putExtra("matchPos", position);
@@ -271,8 +272,13 @@ public class PlaceholderFragment extends Fragment {
                 }
                 NewsAdapter newsAdapter = new NewsAdapter(newsModelList, requireActivity(), bannerAds, (newsDatum, position) -> {
 //                    if (position % 2 == 0) {
-                   // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
-                    MyApp.showInterstitialAd(requireActivity());
+                    // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            MyApp.showInterstitialAd(requireActivity());
+                        }
+                    },5000);
 
                     Intent intent = new Intent(context, NewsActivity.class);
                     intent.putExtra("newsPos", position);
@@ -395,8 +401,13 @@ public class PlaceholderFragment extends Fragment {
                 FootBallAdapter footBallAdapter = new FootBallAdapter(footBallModelList, requireActivity(), bannerAds, (datum, position) -> {
 
 //                    if (position % 2 == 0) {
-                   // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
-                    MyApp.showInterstitialAd(requireActivity());
+                    // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            MyApp.showInterstitialAd(requireActivity());
+                        }
+                    },5000);
 
                     Intent intent = new Intent(context, MatchDetails.class);
                     intent.putExtra("id", datum.getId());
