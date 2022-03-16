@@ -99,4 +99,19 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_ball"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:elevation="3dp"
+        android:layout_marginStart="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/start_btn"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="ball_anim.json"
+        app:lottie_loop="true" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.tabs.TabLayout;
 import com.sumit.myexpertteam.activities.ui.main.MatchDetailPagerAdapter;
 import com.sumit.myexpertteam.databinding.ActivityMatchDetailsBinding;
+import com.sumit.myexpertteam.utils.AdsViewModel;
 import com.sumit.myexpertteam.utils.MyService;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -87,6 +88,7 @@ public class MatchDetails extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        AdsViewModel.destroyBanner();
         overridePendingTransition(0, 0);
         finish();
         overridePendingTransition(0, 0);
@@ -108,6 +110,8 @@ public class MatchDetails extends AppCompatActivity {
         binding.tabs.setVisibility(View.VISIBLE);
         viewPager.setVisibility(View.VISIBLE);
         if (count == 4) {
+            AdsViewModel adsViewModel = new AdsViewModel(this,binding.adView);
+            getLifecycle().addObserver(adsViewModel);
             viewPager.setAdapter(matchDetailPagerAdapter);
             TabLayout tabs = binding.tabs;
             tabs.setupWithViewPager(viewPager);

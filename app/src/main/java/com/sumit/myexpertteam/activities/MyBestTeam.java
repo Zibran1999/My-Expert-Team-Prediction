@@ -17,6 +17,7 @@ import com.sumit.myexpertteam.databinding.ActivityMyBestTeamBinding;
 import com.sumit.myexpertteam.models.MatchDetailModels.MatchViewModel;
 import com.sumit.myexpertteam.models.MatchDetailModels.MatchViewModelFactory;
 import com.sumit.myexpertteam.models.TeamPlayerModels.TeamPlayerModel;
+import com.sumit.myexpertteam.utils.AdsViewModel;
 import com.sumit.myexpertteam.utils.MyApp;
 
 import java.util.List;
@@ -35,6 +36,10 @@ public class MyBestTeam extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMyBestTeamBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        MyApp.showInterstitialAd(MyBestTeam.this);
+       AdsViewModel adsViewModel = new AdsViewModel(this,binding.adView);
+        getLifecycle().addObserver(adsViewModel);
 
         teamName = getIntent().getStringExtra("teamName");
         showBestTeamImage(this, teamName);
@@ -148,6 +153,7 @@ public class MyBestTeam extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        AdsViewModel.destroyBanner();
         super.onBackPressed();
 
     }

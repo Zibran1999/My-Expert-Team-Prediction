@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,6 @@ public class WelcomeActivity extends AppCompatActivity {
     private final String TAG = WelcomeActivity.class.getSimpleName();
     ActivityWelcomeBinding binding;
     CircleImageView contactBtn, startBtn, shareBtn;
-    AppOpenManager appOpenManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,43 +40,12 @@ public class WelcomeActivity extends AppCompatActivity {
         MyApp.showBannerAd(this, binding.adView2);
 
         startBtn.setOnClickListener(v -> {
-
-            new Handler().postDelayed(() -> startActivity(new Intent(getApplicationContext(), MyHome.class)), 1000);
-
-
-//            if (MyApp.mInterstitialAd != null) {
-//                MyApp.mInterstitialAd.show(WelcomeActivity.this);
-//                MyApp.mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-//                    @Override
-//                    public void onAdDismissedFullScreenContent() {
-//                        // Called when fullscreen content is dismissed.
-//                        startActivity(new Intent(getApplicationContext(), MyHomeActivity.class));
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdFailedToShowFullScreenContent(AdError adError) {
-//                        // Called when fullscreen content failed to show.
-//                        Log.d("TAG", "The ad failed to show.");
-//                    }
-//
-//                    @Override
-//                    public void onAdShowedFullScreenContent() {
-//                        // Called when fullscreen content is shown.
-//                        // Make sure to set your reference to null so you don't
-//                        // show it a second time.
-//                        MyApp.mInterstitialAd = null;
-//                        Log.d("TAG", "The ad was shown.");
-//                    }
-//                });
-//            } else {
-//                MyApp.showInterstitialAd(WelcomeActivity.this);
-//                startActivity(new Intent(getApplicationContext(), MyHomeActivity.class));
-//
-//
-//                Log.d("TAG", "The interstitial ad wasn't ready yet.");
-//
-//            }
+            binding.lottieBall.setVisibility(View.VISIBLE);
+            MyApp.showInterstitialAd(this);
+            new Handler().postDelayed(() -> {
+                startActivity(new Intent(getApplicationContext(), MyHome.class));
+                binding.lottieBall.setVisibility(View.GONE);
+            }, 3000);
 
         });
         contactBtn.setOnClickListener(v -> {

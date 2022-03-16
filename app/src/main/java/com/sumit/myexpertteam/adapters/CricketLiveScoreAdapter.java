@@ -158,7 +158,7 @@ public class CricketLiveScoreAdapter extends RecyclerView.Adapter<RecyclerView.V
                 }
             }).build();
 
-            adLoader.loadAd(new AdRequest.Builder().build());
+//            adLoader.loadAd(new AdRequest.Builder().build());
 
         }
 

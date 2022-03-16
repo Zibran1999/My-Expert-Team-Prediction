@@ -32,6 +32,7 @@ import com.sumit.myexpertteam.models.FootballDataModels.FootBallData;
 import com.sumit.myexpertteam.models.MatchDetailModels.Datum;
 import com.sumit.myexpertteam.models.MatchDetailModels.MatchViewModel;
 import com.sumit.myexpertteam.models.MatchNewsModels.NewsDatum;
+import com.sumit.myexpertteam.utils.AdsViewModel;
 import com.sumit.myexpertteam.utils.AppOpenManager;
 import com.sumit.myexpertteam.utils.MyApp;
 
@@ -56,7 +57,6 @@ public class PlaceholderFragment extends Fragment {
     LottieAnimationView lottieAnimationView;
     RecyclerView recyclerView;
     RelativeLayout adView;
-    AppOpenManager appOpenManager;
     private FragmentMyHomeBinding binding;
 
     public static PlaceholderFragment newInstance(int index) {
@@ -96,24 +96,25 @@ public class PlaceholderFragment extends Fragment {
 
         matchViewModel = new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
         if (index == 1) {
-            new Handler().postDelayed(() -> {
-                MyApp.showInterstitialAd(requireActivity());
+            MyApp.showBannerAd(requireActivity(),binding.adView);
 
-            }, 3000);
             lottieAnimationView.setAnimation(R.raw.loding_dot);
             lottieAnimationView.playAnimation();
             swipeRefreshLayout.setOnRefreshListener(() -> {
                 setMatchData(root.getContext());
                 swipeRefreshLayout.setRefreshing(false);
+                MyApp.showBannerAd(requireActivity(),binding.adView);
             });
             setMatchData(root.getContext());
 
         } else if (index == 2) {
+            MyApp.showBannerAd(requireActivity(),binding.adView);
 
             lottieAnimationView.setAnimation(R.raw.loding_dot);
             lottieAnimationView.playAnimation();
             swipeRefreshLayout.setOnRefreshListener(() -> {
                 setNewsData(root.getContext());
+                MyApp.showBannerAd(requireActivity(),binding.adView);
                 swipeRefreshLayout.setRefreshing(false);
             });
             setNewsData(root.getContext());
@@ -121,8 +122,10 @@ public class PlaceholderFragment extends Fragment {
         } else if (index == 3) {
             lottieAnimationView.setAnimation(R.raw.loding_dot);
             lottieAnimationView.playAnimation();
+            MyApp.showBannerAd(requireActivity(),binding.adView);
 
             swipeRefreshLayout.setOnRefreshListener(() -> {
+                MyApp.showBannerAd(requireActivity(),binding.adView);
                 setFootBallData(root.getContext());
                 swipeRefreshLayout.setRefreshing(false);
             });
@@ -159,6 +162,7 @@ public class PlaceholderFragment extends Fragment {
 //                    if (position % 2 == 0) {
 
                     // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
+                    AdsViewModel.destroyBanner();
 
 
                     Intent intent = new Intent(context, MatchDetails.class);
@@ -244,7 +248,6 @@ public class PlaceholderFragment extends Fragment {
                 Collections.reverse(cricketLiveScoreModelList);
                 cricketLiveScoreAdapter.notifyDataSetChanged();
                 lottieAnimationView.setVisibility(View.GONE);
-                MyApp.showBannerAd(requireActivity(), adView);
 
 
             } else {
@@ -271,6 +274,7 @@ public class PlaceholderFragment extends Fragment {
                 NewsAdapter newsAdapter = new NewsAdapter(newsModelList, requireActivity(), bannerAds, (newsDatum, position) -> {
 //                    if (position % 2 == 0) {
                     // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
+                    AdsViewModel.destroyBanner();
 
                     Intent intent = new Intent(context, NewsActivity.class);
                     intent.putExtra("newsPos", position);
@@ -361,7 +365,6 @@ public class PlaceholderFragment extends Fragment {
                 Collections.reverse(newsModelList);
                 newsAdapter.notifyDataSetChanged();
                 lottieAnimationView.setVisibility(View.GONE);
-                MyApp.showBannerAd(requireActivity(), adView);
 
             } else {
                 lottieAnimationView.setAnimation(R.raw.empty);
@@ -391,6 +394,7 @@ public class PlaceholderFragment extends Fragment {
                     footBallModelList.add(new FootBallData(id, img1, img2, team1, team2, date, desc, time));
                 }
                 FootBallAdapter footBallAdapter = new FootBallAdapter(footBallModelList, requireActivity(), bannerAds, (datum, position) -> {
+                    AdsViewModel.destroyBanner();
 
 //                    if (position % 2 == 0) {
                     // appOpenManager = new AppOpenManager(MyApp.mInstance, Paper.book().read(Prevalent.openAppAds), context);
@@ -476,7 +480,6 @@ public class PlaceholderFragment extends Fragment {
                 Collections.reverse(footBallModelList);
                 footBallAdapter.notifyDataSetChanged();
                 lottieAnimationView.setVisibility(View.GONE);
-                MyApp.showBannerAd(requireActivity(), adView);
 
             } else {
                 lottieAnimationView.setAnimation(R.raw.empty);

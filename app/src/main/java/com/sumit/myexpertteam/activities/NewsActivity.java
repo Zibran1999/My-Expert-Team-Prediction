@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.sumit.myexpertteam.R;
+import com.sumit.myexpertteam.utils.AdsViewModel;
 import com.sumit.myexpertteam.utils.MyApp;
 
 
@@ -20,7 +21,8 @@ public class NewsActivity extends AppCompatActivity {
     ImageView newsImg, backIcon;
     TextView newsTitle, newsDesc;
     String img, desc, title;
-    RelativeLayout adView;
+    RelativeLayout adView,adview2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class NewsActivity extends AppCompatActivity {
         newsDesc = findViewById(R.id.newsDesc);
         backIcon = findViewById(R.id.back_icon);
         adView = findViewById(R.id.adView);
+        adview2 = findViewById(R.id.adView2);
 
         img = getIntent().getStringExtra("img");
         desc = getIntent().getStringExtra("desc");
@@ -45,7 +48,11 @@ public class NewsActivity extends AppCompatActivity {
         Glide.with(this).load("https://softwaresreviewguides.com/dreamteam11/APIs/Cricket_News_Images/" + img).into(newsImg);
         newsTitle.setText(title);
         newsDesc.setText(desc);
-        MyApp.showBannerAd(this,adView);
+        MyApp.showInterstitialAd(this);
+        AdsViewModel adsViewModel = new AdsViewModel(this,adView);
+        getLifecycle().addObserver(adsViewModel);
+
+        MyApp.showBannerAd(this,adview2);
         backIcon.setOnClickListener(v -> onBackPressed());
 
 
@@ -54,6 +61,7 @@ public class NewsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        AdsViewModel.destroyBanner();
         overridePendingTransition(0, 0);
         finish();
         overridePendingTransition(0, 0);

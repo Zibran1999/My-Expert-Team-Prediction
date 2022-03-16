@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -45,6 +46,7 @@ import com.sumit.myexpertteam.BuildConfig;
 import com.sumit.myexpertteam.R;
 import com.sumit.myexpertteam.activities.ui.main.SectionsPagerAdapter;
 import com.sumit.myexpertteam.databinding.ActivityMyHomeBinding;
+import com.sumit.myexpertteam.utils.AdsViewModel;
 import com.sumit.myexpertteam.utils.MyService;
 
 
@@ -59,7 +61,7 @@ public class MyHome extends AppCompatActivity implements NavigationView.OnNaviga
     ImageView navMenu;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    CoordinatorLayout categoryContainer;
+    ConstraintLayout categoryContainer;
     ViewPager viewPager;
     SectionsPagerAdapter sectionsPagerAdapter;
     LottieAnimationView lottieAnimationView, whatsappLottie;
@@ -312,6 +314,8 @@ public class MyHome extends AppCompatActivity implements NavigationView.OnNaviga
         binding.viewPager.setVisibility(View.VISIBLE);
         binding.tabs.setVisibility(View.VISIBLE);
         if (count == 4) {
+            AdsViewModel adsViewModel = new AdsViewModel(this,binding.adView);
+            getLifecycle().addObserver(adsViewModel);
             viewPager.setAdapter(sectionsPagerAdapter);
             viewPager.setOffscreenPageLimit(3);
             TabLayout tabs = binding.tabs;
